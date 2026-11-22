@@ -1,0 +1,17 @@
+# Dev only. Pin image digests before production. Replace placeholders in .env (never commit it).
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes: [pgdata:/var/lib/postgresql/data]
+    ports: ["127.0.0.1:5433:5432"]
+  redis:
+    image: redis:7
+    command: ["redis-server", "--appendonly", "yes", "--requirepass", "${REDIS_PASSWORD}"]
+    ports: ["127.0.0.1:6380:6379"]
+volumes:
+  pgdata:
+# api/worker/scheduler/web services are added once the Laravel + React apps are scaffolded.
