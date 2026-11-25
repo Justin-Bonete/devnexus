@@ -1,20 +1,16 @@
 # DEVNEXUS implementation status
-Legend: [x] done and tested, [~] drafted, not verified, [ ] not started
+
+Rule: nothing is "done" until its test passes on a clean machine.
 
 ## Phase 0
-- [~] ADR-011..015 (docs/adr) - awaiting owner confirmation
-- [~] State-transition tables (docs/architecture/state-machines.md)
-- [~] Draft PostgreSQL schema with org_id, RLS, outbox, audit (db/schema.sql) - NOT run against Postgres
-- [~] Dev compose for Postgres + Redis - NOT started/tested
-- [ ] Laravel + React scaffold, CI, OpenAPI skeleton
-- [ ] Tenant-isolation test suite
+- [x] Compose (Postgres + Redis), ADR-011..015, state machines, draft schema
 
-## Traceability (seed)
-| Req | Implementation | Test | State |
-|---|---|---|---|
-| FR-CORE-06 / FR-SEC-10 | schema org_id + RLS | pending | [~] |
-| FR-CHAT-03 | messages UNIQUE(conversation_id, idempotency_key) | pending | [~] |
-| FR-AG-02 | state-machines.md | pending | [~] |
-| NFR-SEC-02 | audit_logs append-only trigger | pending | [~] |
-| FR-REQ-05 | trace_links | pending | [~] |
-| FR-REQ-09 | change_requests | pending | [~] |
+## Phase 1 / Milestone 1 (foundation)
+- [ ] Step 1: schema v2, DB roles, RLS everywhere, composite FKs, TenantContext, isolation tests, Laravel 13
+      -> delivered, awaiting your confirmation (scripts/setup.ps1 -Reset)
+- [ ] Step 2: session auth, organizations, clients, projects, role policies, hash-chained audit log
+      -> delivered, untested (scripts/apply-overlay.ps1)
+- [ ] Step 3: React + Vite scaffold (same-origin proxy), login + project list screens, CI pipeline
+
+## Next
+M2 chat/outbox/mock AI/requirement extraction -> M3 planner/tasks/runs/approvals -> M4 SRS docs/notifications/budgets
